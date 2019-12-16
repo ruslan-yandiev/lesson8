@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module InstanceCounter
   def self.included(arg_class) # InstanceCounter.included(Train)
     arg_class.extend ClassMethods
@@ -8,7 +10,7 @@ module InstanceCounter
     attr_reader :instances
 
     def plus
-      @instances ||= 0 #@instances = @instances || 0
+      @instances ||= 0 # @instances = @instances || 0
       @instances += 1
     end
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PassengerTrain < Train
   @train_collection = {}
 
@@ -9,5 +11,3 @@ class PassengerTrain < Train
     end
   end
 end
-
-

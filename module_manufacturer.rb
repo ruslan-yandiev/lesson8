@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module TrainCarrige
   attr_reader :name_manufacturer
 

@@ -1,5 +1,6 @@
-class PassengerCarrig < Carrig
+# frozen_string_literal: true
 
+class PassengerCarrig < Carrig
   def increase_amount
     super(1)
   end

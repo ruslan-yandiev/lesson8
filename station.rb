@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class Station
   include InstanceCounter
 
   attr_reader :train, :name
 
-  NAME = /^[а-яa-z]+\D/i
+  NAME = /^[а-яa-z]+\D/i.freeze
 
   @@all = []
 
@@ -49,4 +51,3 @@ class Station
 
   protected :validate!, :each_train
 end
-

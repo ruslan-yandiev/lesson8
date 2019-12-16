@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class Carrig
   include TrainCarrige
 
-  NUMBER_FORMAT = /^[0-9a-zа-я]{3}-?[0-9a-zа-я]{2}$/i
-  NAME_FORMAT = /^[а-яa-z]+\D/i
+  NUMBER_FORMAT = /^[0-9a-zа-я]{3}-?[0-9a-zа-я]{2}$/i.freeze
+  NAME_FORMAT = /^[а-яa-z]+\D/i.freeze
 
   attr_reader :number, :amount
 
@@ -47,11 +49,13 @@ class Carrig
     raise 'Name manufacturer can`t be nil' if @name_manufacturer.nil?
     raise 'Name manufacturer can`t be empty string' if @name_manufacturer == ''
     raise 'Number has invalid format' if @number !~ NUMBER_FORMAT
-    raise 'Name manufacturer has invalid format' if @name_manufacturer !~ NAME_FORMAT
+    if @name_manufacturer !~ NAME_FORMAT
+      raise 'Name manufacturer has invalid format'
+    end
   end
 
   def change_status(train)
-    train.carrig.include?(self)? connect : disconnect
+    train.carrig.include?(self) ? connect : disconnect
   end
 
   def connect
@@ -63,7 +67,7 @@ class Carrig
   end
 
   def to_s
-    "Тип вагона: #{self.class}, номер: #{number}, соединен ли с поездом: #{@status}, производитель #{self.name_manufacturer} "
+    "Тип вагона: #{self.class}, номер: #{number}, соединен ли с поездом: #{@status}, производитель #{name_manufacturer} "
   end
 
   # Методы необходимо инкапсулировать, для того, чтобы их статус мог быть изменен

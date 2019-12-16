@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class Train
   include TrainCarrige
-  include InstanceCounter #Train.include(InstanceCounter)
+  include InstanceCounter # Train.include(InstanceCounter)
 
-  NUMBER_FORMAT = /^[0-9a-zа-я]{3}-?[0-9a-zа-я]{2}$/i
-  NAME_FORMAT = /^[а-яa-z]+\D/i
+  NUMBER_FORMAT = /^[0-9a-zа-я]{3}-?[0-9a-zа-я]{2}$/i.freeze
+  NAME_FORMAT = /^[а-яa-z]+\D/i.freeze
 
   attr_reader :carrig, :number
 
@@ -45,7 +47,9 @@ class Train
     raise 'Name manufacturer can`t be nil' if @name_manufacturer.nil?
     raise 'Name manufacturer can`t be empty string' if @name_manufacturer == ''
     raise 'Number has invalid format' if @number !~ NUMBER_FORMAT
-    raise 'Name manufacturer has invalid format' if @name_manufacturer !~ NAME_FORMAT
+    if @name_manufacturer !~ NAME_FORMAT
+      raise 'Name manufacturer has invalid format'
+    end
   end
 
   def get!
@@ -98,13 +102,13 @@ class Train
       @carrig << carrig
       carrig.change_status(self)
     else
-      puts "На ходу нельзя цеплять вагоны!"
+      puts 'На ходу нельзя цеплять вагоны!'
     end
   end
 
   def delete_carrig(carrig = nil)
     if @carrig.size.zero?
-      puts "Вагонов уже не осталось."
+      puts 'Вагонов уже не осталось.'
     elsif carrig.nil? && @speed.zero?
       disconnect_carrig = @carrig.shift
       disconnect_carrig.change_status(self)
@@ -112,7 +116,7 @@ class Train
       @carrig.delete(carrig)
       carrig.change_status(self)
     else
-      puts "На ходу нельзя отцеплять вагоны!"
+      puts 'На ходу нельзя отцеплять вагоны!'
     end
   end
 
@@ -125,7 +129,7 @@ class Train
 
   def go
     if @route.nil?
-      puts "У поезда нет маршрута следования."
+      puts 'У поезда нет маршрута следования.'
     elsif @sum == @arr_stations.size - 1
       puts 'Поезд находится на конечной станции'
     else
@@ -139,7 +143,7 @@ class Train
 
   def go_back
     if @route.nil?
-      puts "У поезда нет маршрута следования."
+      puts 'У поезда нет маршрута следования.'
     elsif @sum.zero?
       puts 'Поезд находится на начальной станции'
     else
@@ -155,6 +159,6 @@ class Train
     puts "Поезд находится на станции: #{@train_now.name}" if @route
   end
 
-  #метод защищен так как нельзя стартовать не зная в каком направлении должен двигаться поезд.
+  # метод защищен так как нельзя стартовать не зная в каком направлении должен двигаться поезд.
   protected :start, :validate!
 end

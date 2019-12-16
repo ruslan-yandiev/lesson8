@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'module_manufacturer'
 require_relative 'instance_counter'
 require_relative 'carrig'
@@ -11,14 +13,15 @@ require_relative 'route'
 require_relative 'сonstructor'
 
 arr = [
-"- Создавать станции",
-"- Создавать поезда",
-"- Создавать маршруты и управлять станциями в нем (добавлять, удалять)",
-"- Назначать маршрут поезду",
-"- Добавлять вагоны к поезду",
-"- Отцеплять вагоны от поезда",
-"- Перемещать поезд по маршруту вперед и назад",
-"- Просматривать список станций и список поездов на станции"]
+  '- Создавать станции',
+  '- Создавать поезда',
+  '- Создавать маршруты и управлять станциями в нем (добавлять, удалять)',
+  '- Назначать маршрут поезду',
+  '- Добавлять вагоны к поезду',
+  '- Отцеплять вагоны от поезда',
+  '- Перемещать поезд по маршруту вперед и назад',
+  '- Просматривать список станций и список поездов на станции'
+]
 
 puts 'Программа позволит:'
 arr.each { |x| puts x }
@@ -37,6 +40,6 @@ begin
   amount = gets.chomp.to_i
 
   choices.constructor(number, amount)
-end while choices.collection.size != 0
+end while !choices.collection.empty?
 
 choices.start
