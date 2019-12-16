@@ -20,10 +20,7 @@ class Station
   end
 
   def valid?
-    validate!
-    true
-  rescue
-    false
+    !!validate!
   end
 
   def validate!

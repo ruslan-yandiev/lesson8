@@ -99,25 +99,13 @@ class Сonstructor
   end
 
   def start
-    show_all_object
-    p Station.all
-    route!
-    correct_route
-    connect_carrig!
-    freight_carrig_filling
-    passenger_carrig_filling
-    show_carr!
-    cargo_carrige_delete!
-    passenger_carrige_delete!
-    show_carr!
-    cargo_train_add_route
-    passenger_train_add_route
-    station_info_train
-    go_go
-    go_back
-    station_info_train
-    find!
-    show_amount_object
+    send_methods = [
+      show_all_object, p Station.all, route!, correct_route, connect_carrig!, freight_carrig_filling, passenger_carrig_filling, show_carr!,
+      cargo_carrige_delete!, passenger_carrige_delete!, show_carr!, cargo_train_add_route, passenger_train_add_route, station_info_train,
+      go_go, go_back, station_info_train, find!, show_amount_object
+    ]
+
+    send_methods.each { |method| method }
   end
 
   def show_amount_object
@@ -144,7 +132,7 @@ class Сonstructor
 
       @f_carrigs[number].increase_amount(weight) if @f_carrigs[number]
 
-      self.freight_carrig_filling
+      freight_carrig_filling
     end
   end
 
@@ -160,7 +148,7 @@ class Сonstructor
 
       @p_carrigs[number].increase_amount if @p_carrigs[number]
 
-      self.passenger_carrig_filling
+      passenger_carrig_filling
     end
   end
 
@@ -176,7 +164,7 @@ class Сonstructor
 
       @stations[number].show_trains_info if @stations[number]
 
-      self.station_info_train
+      station_info_train
     end
   end
 
@@ -204,7 +192,7 @@ class Сonstructor
     puts 'Хотите закончить процедуру отображение объектов поездов (да/нет)'
     yes_or_no = gets.chomp
 
-    self.find! if yes_or_no != 'да'
+    find! if yes_or_no != 'да'
   end
 
   def route!
@@ -218,13 +206,15 @@ class Сonstructor
 
     unless @routes[number_r]
       puts 'Неверно выбран маршрут!!!'
-      self.route!
+      route!
     end
 
+    add_route!
+  end
+
+  def add_route!
     begin
-      @stations.each_with_index do |type, index|
-        puts "\t#{index}. Станция: #{type.name}"
-      end
+      @stations.each_with_index { |type, index| puts "\t#{index}. Станция: #{type.name}" }
 
       puts "Укажите номер станции.\nСтанции будут добавляться по порядку, от начальной и до конечной."
       number_s = gets.chomp.to_i
@@ -241,7 +231,8 @@ class Сonstructor
 
     puts 'Хотите сформировать новый маршрут? (да/нет)'
     yes_or_no = gets.chomp
-    self.route! if yes_or_no == 'да'
+
+    route! if yes_or_no == 'да'
   end
 
   def correct_route

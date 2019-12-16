@@ -1,10 +1,10 @@
 class Carrig
   include TrainCarrige
 
-  attr_reader :number, :amount
-
   NUMBER_FORMAT = /^[0-9a-zа-я]{3}-?[0-9a-zа-я]{2}$/i
   NAME_FORMAT = /^[а-яa-z]+\D/i
+
+  attr_reader :number, :amount
 
   def initialize(number, amount)
     @number = number
@@ -39,10 +39,7 @@ class Carrig
   end
 
   def valid?
-    validate!
-    true
-  rescue
-    false
+    !!validate!
   end
 
   def validate!

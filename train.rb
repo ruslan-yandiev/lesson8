@@ -2,10 +2,10 @@ class Train
   include TrainCarrige
   include InstanceCounter #Train.include(InstanceCounter)
 
-  attr_reader :carrig, :number
-
   NUMBER_FORMAT = /^[0-9a-zа-я]{3}-?[0-9a-zа-я]{2}$/i
   NAME_FORMAT = /^[а-яa-z]+\D/i
+
+  attr_reader :carrig, :number
 
   def initialize(number)
     @number = number
@@ -37,10 +37,7 @@ class Train
   end
 
   def valid?
-    validate!
-    true
-  rescue
-    false
+    !!validate!
   end
 
   def validate!
@@ -121,7 +118,7 @@ class Train
 
   def add_route(route_train)
     @route = route_train
-    @route.route.each { |x| @arr_stations << x}
+    @route.route.each { |x| @arr_stations << x }
     @arr_stations[0].get_train(self)
     @train_now = @arr_stations[0]
   end
