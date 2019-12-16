@@ -51,11 +51,7 @@ class Carrig
   end
 
   def change_status(train)
-    if train.carrig.include?(self)
-      connect
-    else
-      disconnect
-    end
+    train.carrig.include?(self)? connect : disconnect
   end
 
   def connect

@@ -57,7 +57,7 @@ class Train
   end
 
   def speed=(arg)
-    @speed = arg if @speed > 0
+    @speed = arg if @speed.positive?
   end
 
   def show_speed
@@ -73,7 +73,7 @@ class Train
   end
 
   def show_add_train
-    puts "Создан поезд тип: #{self.class} №#{self.number}, произведен #{self.name_manufacturer}"
+    puts "Создан поезд тип: #{self.class} №#{@number}, произведен #{@name_manufacturer}"
   end
 
   def show_carriages
@@ -82,7 +82,7 @@ class Train
   end
 
   def to_s
-    "Поезд тип: #{self.class} №#{self.number}, произведен #{self.name_manufacturer} присоединено вагонов: #{@carrig.size}"
+    "Поезд тип: #{self.class} №#{@number}, произведен #{@name_manufacturer} присоединено вагонов: #{@carrig.size}"
   end
 
   def show_route(arg = nil)
@@ -140,7 +140,7 @@ class Train
   def go_back
     if @route.nil?
       puts "У поезда нет маршрута следования."
-    elsif @sum == 0
+    elsif @sum.zero?
       puts 'Поезд находится на начальной станции'
     else
       start
