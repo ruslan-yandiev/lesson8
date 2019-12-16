@@ -21,81 +21,105 @@ class Сonstructor
       if @collection[number].nil?
         puts 'Вы неверно указали номер!!!'
       elsif @collection[number] == Station
-        begin
-          puts 'Введите имя станции:'
-          name = gets.chomp
-          object = @collection[number].new(name)
-          @stations << object
-        rescue RuntimeError => e
-          puts e
-          retry
-        end
+          constructor1(number)
       elsif  @collection[number] == Route
-        begin
-          puts 'Введите имя маршрута:'
-          name = gets.chomp
-          object = @collection[number].new(name)
-          @routes << object
-        rescue RuntimeError => e
-          puts e
-          retry
-        end
+          constructor2(number)
       elsif  @collection[number] == CargoTrain
-        begin
-          puts "Введите номер.\nДопустимый формат: три буквы или цифры в любом порядке,
-          \rнеобязательный дефис (может быть, а может нет) и еще 2 буквы или цифры после дефиса."
-          numb = gets.chomp
-          object = @collection[number].new(numb)
-          @cargo_trains << object
-        rescue RuntimeError => e
-          puts e
-          retry
-        end
+          constructor3(number)
       elsif  @collection[number] == PassengerTrain
-        begin
-          puts "Введите номер.\nДопустимый формат: три буквы или цифры в любом порядке,
-          \rнеобязательный дефис (может быть, а может нет) и еще 2 буквы или цифры после дефиса."
-          numb = gets.chomp
-          object = @collection[number].new(numb)
-          @passenger_trains << object
-        rescue RuntimeError => e
-          puts e
-          retry
-        end
+          constructor4(number)
       elsif  @collection[number] == FreightCarrig
-        begin
-          puts "Введите номер.\nДопустимый формат: три буквы или цифры в любом порядке,
-          \rнеобязательный дефис (может быть, а может нет) и еще 2 буквы или цифры после дефиса."
-          numb = gets.chomp
-
-          puts 'Укажите общую грузоподъемность в кг:'
-          amounts = gets.chomp.to_i
-
-          object = @collection[number].new(numb, amounts)
-          @f_carrigs << object
-        rescue RuntimeError => e
-          puts e
-          retry
-        end
+          constructor5(number)
       elsif  @collection[number] == PassengerCarrig
-        begin
-          puts "Введите номер.\nДопустимый формат: три буквы или цифры в любом порядке,
-          \rнеобязательный дефис (может быть, а может нет) и еще 2 буквы или цифры после дефиса."
-          numb = gets.chomp
-
-          puts 'Укажите общее колличество мест в вагоне:'
-          amounts = gets.chomp.to_i
-
-          object = @collection[number].new(numb, amounts)
-          @p_carrigs << object
-        rescue RuntimeError => e
-          puts e
-          retry
-        end
+          constructor6(number)
       end
     end
 
     @collection.delete_at(number)
+  end
+
+  def constructor1(number)
+    begin
+      puts 'Введите имя станции:'
+      name = gets.chomp
+      object = @collection[number].new(name)
+      @stations << object
+    rescue RuntimeError => e
+      puts e
+      retry
+    end
+  end
+
+  def constructor2(number)
+    begin
+      puts 'Введите имя маршрута:'
+      name = gets.chomp
+      object = @collection[number].new(name)
+      @routes << object
+    rescue RuntimeError => e
+      puts e
+      retry
+    end
+  end
+
+  def constructor3(number)
+    begin
+      puts "Введите номер.\nДопустимый формат: три буквы или цифры в любом порядке,
+      \rнеобязательный дефис (может быть, а может нет) и еще 2 буквы или цифры после дефиса."
+      numb = gets.chomp
+      object = @collection[number].new(numb)
+      @cargo_trains << object
+    rescue RuntimeError => e
+      puts e
+      retry
+    end
+  end
+
+  def constructor4(number)
+    begin
+      puts "Введите номер.\nДопустимый формат: три буквы или цифры в любом порядке,
+      \rнеобязательный дефис (может быть, а может нет) и еще 2 буквы или цифры после дефиса."
+      numb = gets.chomp
+      object = @collection[number].new(numb)
+      @passenger_trains << object
+    rescue RuntimeError => e
+      puts e
+      retry
+    end
+  end
+
+  def constructor5(number)
+    begin
+      puts "Введите номер.\nДопустимый формат: три буквы или цифры в любом порядке,
+      \rнеобязательный дефис (может быть, а может нет) и еще 2 буквы или цифры после дефиса."
+      numb = gets.chomp
+
+      puts 'Укажите общую грузоподъемность в кг:'
+      amounts = gets.chomp.to_i
+
+      object = @collection[number].new(numb, amounts)
+      @f_carrigs << object
+    rescue RuntimeError => e
+      puts e
+      retry
+    end
+  end
+
+  def constructor6(number)
+    begin
+      puts "Введите номер.\nДопустимый формат: три буквы или цифры в любом порядке,
+      \rнеобязательный дефис (может быть, а может нет) и еще 2 буквы или цифры после дефиса."
+      numb = gets.chomp
+
+      puts 'Укажите общее колличество мест в вагоне:'
+      amounts = gets.chomp.to_i
+
+      object = @collection[number].new(numb, amounts)
+      @p_carrigs << object
+    rescue RuntimeError => e
+      puts e
+      retry
+    end
   end
 
   def start
