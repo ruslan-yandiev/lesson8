@@ -43,13 +43,11 @@ class Train
   end
 
   def validate!
-    raise 'Number can`t be nil' if @number.nil?
-    raise 'Name manufacturer can`t be nil' if @name_manufacturer.nil?
+    raise 'Number can`t be nil' if !@number
+    raise 'Name manufacturer can`t be nil' if !@name_manufacturer
     raise 'Name manufacturer can`t be empty string' if @name_manufacturer == ''
     raise 'Number has invalid format' if @number !~ NUMBER_FORMAT
-    if @name_manufacturer !~ NAME_FORMAT
-      raise 'Name manufacturer has invalid format'
-    end
+    raise 'Name manufacturer has invalid format' if @name_manufacturer !~ NAME_FORMAT
   end
 
   def get!
@@ -109,7 +107,7 @@ class Train
   def delete_carrig(carrig = nil)
     if @carrig.size.zero?
       puts 'Вагонов уже не осталось.'
-    elsif carrig.nil? && @speed.zero?
+    elsif !carrig && @speed.zero?
       disconnect_carrig = @carrig.shift
       disconnect_carrig.change_status(self)
     elsif @speed.zero?
@@ -128,7 +126,7 @@ class Train
   end
 
   def go
-    if @route.nil?
+    if !@route
       puts 'У поезда нет маршрута следования.'
     elsif @sum == @arr_stations.size - 1
       puts 'Поезд находится на конечной станции'
@@ -142,7 +140,7 @@ class Train
   end
 
   def go_back
-    if @route.nil?
+    if !@route
       puts 'У поезда нет маршрута следования.'
     elsif @sum.zero?
       puts 'Поезд находится на начальной станции'

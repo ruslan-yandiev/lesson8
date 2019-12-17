@@ -45,13 +45,11 @@ class Carrig
   end
 
   def validate!
-    raise 'Number can`t be nil' if @number.nil?
-    raise 'Name manufacturer can`t be nil' if @name_manufacturer.nil?
+    raise 'Number can`t be nil' if !@number
+    raise 'Name manufacturer can`t be nil' if !@name_manufacturer
     raise 'Name manufacturer can`t be empty string' if @name_manufacturer == ''
     raise 'Number has invalid format' if @number !~ NUMBER_FORMAT
-    if @name_manufacturer !~ NAME_FORMAT
-      raise 'Name manufacturer has invalid format'
-    end
+    raise 'Name manufacturer has invalid format' if @name_manufacturer !~ NAME_FORMAT
   end
 
   def change_status(train)

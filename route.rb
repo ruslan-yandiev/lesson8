@@ -19,7 +19,7 @@ class Route
   end
 
   def validate!
-    raise 'Name can`t be nil' if @name.nil?
+    raise 'Name can`t be nil' if !@name
     raise 'Name can`t be empty string' if @name == ''
     raise 'Name has invalid format' if @name !~ NAME
   end
