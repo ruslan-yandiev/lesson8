@@ -1,0 +1,48 @@
+
+Ruby:
+  Enabled: true
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 150
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 22
+
+Metrics/ClassLength:
+  Max: 1000
+
+Metrics/PerceivedComplexity:
+  Max: 20
+
+Metrics/CyclomaticComplexity:
+  Max: 20
+
+Style/DoubleNegation:
+  Enabled: false
+
+Lint/Loop:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 40
+
+Lint/Void:
+  Enabled: false
+
+Naming/FileName:
+  Enabled: false
+
+Style/GuardClause:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/ClassVars:
+  Enabled: false

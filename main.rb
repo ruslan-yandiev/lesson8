@@ -26,7 +26,7 @@ arr = [
 puts 'Программа позволит:'
 arr.each { |x| puts x }
 puts
-choices = Сonstructor.new
+choices = Constructor.new
 
 begin
   choices.collection.each_with_index do |type, index|

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop get the f..k out
 class Carrig
   include TrainCarrige
 
@@ -45,11 +46,13 @@ class Carrig
   end
 
   def validate!
-    raise 'Number can`t be nil' if !@number
-    raise 'Name manufacturer can`t be nil' if !@name_manufacturer
+    raise 'Number can`t be nil' unless @number
+    raise 'Name manufacturer can`t be nil' unless @name_manufacturer
     raise 'Name manufacturer can`t be empty string' if @name_manufacturer == ''
     raise 'Number has invalid format' if @number !~ NUMBER_FORMAT
-    raise 'Name manufacturer has invalid format' if @name_manufacturer !~ NAME_FORMAT
+    if @name_manufacturer !~ NAME_FORMAT
+      raise 'Name manufacturer has invalid format'
+    end
   end
 
   def change_status(train)
@@ -65,10 +68,9 @@ class Carrig
   end
 
   def to_s
-    "Тип вагона: #{self.class}, номер: #{number}, соединен ли с поездом: #{@status}, производитель #{name_manufacturer} "
+    "Тип вагона: #{self.class}, номер: #{number},
+    \r\nсоединен ли с поездом: #{@status}, производитель #{name_manufacturer} "
   end
 
-  # Методы необходимо инкапсулировать, для того, чтобы их статус мог быть изменен
-  # только после присоединения к поезду, а значит доступен только через методы в классе.
   protected :connect, :disconnect, :validate!
 end

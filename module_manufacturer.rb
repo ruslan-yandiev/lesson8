@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop get the f..k out
 module TrainCarrige
   attr_reader :name_manufacturer
 

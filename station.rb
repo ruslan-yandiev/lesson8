@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop get the f..k out
 class Station
   include InstanceCounter
 
@@ -26,7 +27,7 @@ class Station
   end
 
   def validate!
-    raise 'Name can`t be nil' if !@name
+    raise 'Name can`t be nil' unless @name
     raise 'Name can`t be empty string' if @name == ''
     raise 'Name has invalid format' if @name !~ NAME
   end
@@ -37,7 +38,8 @@ class Station
 
   def get_train(train)
     @trains << train
-    puts "На станцию #{name} прибыл поезд: #{train.class},  №#{train.number}, произведенный компанией #{train.name_manufacturer}"
+    puts "На станцию #{name} прибыл поезд: #{train.class},  №#{train.number},
+    \r\nпроизведенный компанией #{train.name_manufacturer}"
   end
 
   def show_trains_info

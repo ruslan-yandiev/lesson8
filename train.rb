@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# this is a comment
 class Train
   include TrainCarrige
   include InstanceCounter # Train.include(InstanceCounter)
@@ -12,9 +13,7 @@ class Train
   def initialize(number)
     @number = number
     @speed = 0
-    @route
     @arr_stations = []
-    @train_now = nil
     @sum = 0
     @carrig = []
     name_manufacturer!
@@ -42,14 +41,6 @@ class Train
     !!validate!
   end
 
-  def validate!
-    raise 'Number can`t be nil' if !@number
-    raise 'Name manufacturer can`t be nil' if !@name_manufacturer
-    raise 'Name manufacturer can`t be empty string' if @name_manufacturer == ''
-    raise 'Number has invalid format' if @number !~ NUMBER_FORMAT
-    raise 'Name manufacturer has invalid format' if @name_manufacturer !~ NAME_FORMAT
-  end
-
   def get!
     self.class.get(@number, self)
   end
@@ -66,16 +57,13 @@ class Train
     puts @speed
   end
 
-  def start
-    @speed = 100
-  end
-
   def stop
     @speed = 0
   end
 
   def show_add_train
-    puts "Создан поезд тип: #{self.class} №#{@number}, произведен #{@name_manufacturer}"
+    puts "Создан поезд тип: #{self.class} №#{@number},
+    \r\nпроизведен #{@name_manufacturer}"
   end
 
   def show_carriages
@@ -84,7 +72,8 @@ class Train
   end
 
   def to_s
-    "Поезд тип: #{self.class} №#{@number}, произведен #{@name_manufacturer} присоединено вагонов: #{@carrig.size}"
+    "Поезд тип: #{self.class} №#{@number}, произведен #{@name_manufacturer}
+    \r\nприсоединено вагонов: #{@carrig.size}"
   end
 
   def show_route(arg = nil)
@@ -113,8 +102,6 @@ class Train
     elsif @speed.zero?
       @carrig.delete(carrig)
       carrig.change_status(self)
-    else
-      puts 'На ходу нельзя отцеплять вагоны!'
     end
   end
 
@@ -131,11 +118,8 @@ class Train
     elsif @sum == @arr_stations.size - 1
       puts 'Поезд находится на конечной станции'
     else
-      start
       @sum += 1
-      @train_now.send_train(self)
-      @arr_stations[@sum].get_train(self)
-      @train_now = @arr_stations[@sum]
+      go_train
     end
   end
 
@@ -145,11 +129,8 @@ class Train
     elsif @sum.zero?
       puts 'Поезд находится на начальной станции'
     else
-      start
       @sum -= 1
-      @train_now.send_train(self)
-      @arr_stations[@sum].get_train(self)
-      @train_now = @arr_stations[@sum]
+      go_train
     end
   end
 
@@ -157,6 +138,26 @@ class Train
     puts "Поезд находится на станции: #{@train_now.name}" if @route
   end
 
-  # метод защищен так как нельзя стартовать не зная в каком направлении должен двигаться поезд.
-  protected :start, :validate!
+  protected
+
+  def go_train
+    start
+    @train_now.send_train(self)
+    @arr_stations[@sum].get_train(self)
+    @train_now = @arr_stations[@sum]
+  end
+
+  def start
+    @speed = 100
+  end
+
+  def validate!
+    raise 'Number can`t be nil' unless @number
+    raise 'Name manufacturer can`t be nil' unless @name_manufacturer
+    raise 'Name manufacturer can`t be empty string' if @name_manufacturer == ''
+    raise 'Number has invalid format' if @number !~ NUMBER_FORMAT
+    if @name_manufacturer !~ NAME_FORMAT
+      raise 'Name manufacturer has invalid format'
+    end
+  end
 end

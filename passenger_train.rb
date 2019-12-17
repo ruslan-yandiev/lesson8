@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop get the f..k out
 class PassengerTrain < Train
   @train_collection = {}
 
