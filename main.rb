@@ -10,7 +10,7 @@ require_relative 'cargo_train'
 require_relative 'passenger_train'
 require_relative 'station'
 require_relative 'route'
-require_relative 'сonstructor'
+require_relative 'snake_case'
 
 arr = [
   '- Создавать станции',
@@ -26,9 +26,9 @@ arr = [
 puts 'Программа позволит:'
 arr.each { |x| puts x }
 puts
-choices = Constructor.new
+choices = Constr.new
 
-begin
+loop do
   choices.collection.each_with_index do |type, index|
     puts "\t#{index}. create: #{type}s"
   end
@@ -40,6 +40,7 @@ begin
   amount = gets.chomp.to_i
 
   choices.constructor(number, amount)
-end while !choices.collection.empty?
+  break if choices.collection.empty?
+end
 
 choices.start

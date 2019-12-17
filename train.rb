@@ -37,8 +37,12 @@ class Train
     @carrig.each { |carrig| yield(carrig) } if block_given?
   end
 
+  # !!validate!
   def valid?
-    !!validate!
+    validate!
+    true
+  rescue StandardError
+    false
   end
 
   def get!
@@ -156,8 +160,6 @@ class Train
     raise 'Name manufacturer can`t be nil' unless @name_manufacturer
     raise 'Name manufacturer can`t be empty string' if @name_manufacturer == ''
     raise 'Number has invalid format' if @number !~ NUMBER_FORMAT
-    if @name_manufacturer !~ NAME_FORMAT
-      raise 'Name manufacturer has invalid format'
-    end
+    raise 'Name manufacturer has invalid format' if @name_manufacturer !~ NAME_FORMAT
   end
 end

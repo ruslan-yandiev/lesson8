@@ -15,8 +15,12 @@ class Route
     register_instance
   end
 
+  # !!validate!
   def valid?
-    !!validate!
+    validate!
+    true
+  rescue StandardError
+    false
   end
 
   def add_stations(new_route)

@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-# rubocop get the f..k out
+# this is comments
 class Carrig
   include TrainCarrige
 
+  attr_reader :number, :amount
+
   NUMBER_FORMAT = /^[0-9a-zа-я]{3}-?[0-9a-zа-я]{2}$/i.freeze
   NAME_FORMAT = /^[а-яa-z]+\D/i.freeze
-
-  attr_reader :number, :amount
 
   def initialize(number, amount)
     @number = number
@@ -42,21 +42,26 @@ class Carrig
   end
 
   def valid?
-    !!validate!
+    validate!
+    true
+  rescue StandardError
+    false
   end
 
   def validate!
-    raise 'Number can`t be nil' unless @number
-    raise 'Name manufacturer can`t be nil' unless @name_manufacturer
+    raise 'Number can`t be nil' if @number.nil?
+    raise 'Name manufacturer can`t be nil' if @name_manufacturer.nil?
     raise 'Name manufacturer can`t be empty string' if @name_manufacturer == ''
     raise 'Number has invalid format' if @number !~ NUMBER_FORMAT
-    if @name_manufacturer !~ NAME_FORMAT
-      raise 'Name manufacturer has invalid format'
-    end
+    raise 'Name manufacturer has invalid format' if @name_manufacturer !~ NAME_FORMAT
   end
 
   def change_status(train)
-    train.carrig.include?(self) ? connect : disconnect
+    if train.carrig.include?(self)
+      connect
+    else
+      disconnect
+    end
   end
 
   def connect
@@ -68,8 +73,7 @@ class Carrig
   end
 
   def to_s
-    "Тип вагона: #{self.class}, номер: #{number},
-    \r\nсоединен ли с поездом: #{@status}, производитель #{name_manufacturer} "
+    "Тип вагона: #{self.class}, номер: #{number}, соединен ли с поездом: #{@status}, производитель #{name_manufacturer}"
   end
 
   protected :connect, :disconnect, :validate!

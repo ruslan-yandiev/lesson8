@@ -1,21 +1,18 @@
+AllCops:
+  TargetRubyVersion: 2.6.3
+
 
 Ruby:
   Enabled: true
 
-Style/FrozenStringLiteralComment:
-  Enabled: false
-
 Metrics/LineLength:
-  Max: 150
-
-Style/Documentation:
-  Enabled: false
+  Max: 120
 
 Metrics/MethodLength:
   Max: 22
 
 Metrics/ClassLength:
-  Max: 1000
+  Max: 600
 
 Metrics/PerceivedComplexity:
   Max: 20
@@ -23,26 +20,9 @@ Metrics/PerceivedComplexity:
 Metrics/CyclomaticComplexity:
   Max: 20
 
-Style/DoubleNegation:
-  Enabled: false
-
-Lint/Loop:
-  Enabled: false
-
 Metrics/AbcSize:
-  Max: 40
-
-Lint/Void:
-  Enabled: false
-
-Naming/FileName:
-  Enabled: false
-
-Style/GuardClause:
-  Enabled: false
-
-Style/IfUnlessModifier:
-  Enabled: false
+  Max: 28
 
 Style/ClassVars:
   Enabled: false
+

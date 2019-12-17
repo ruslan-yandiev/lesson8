@@ -22,8 +22,12 @@ class Station
     @trains.each { |train| yield(train) } if block_given?
   end
 
+  # !!validate!
   def valid?
-    !!validate!
+    validate!
+    true
+  rescue StandardError
+    false
   end
 
   def validate!

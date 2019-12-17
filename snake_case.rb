@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-class Constructor
+# this is me conctructor class
+class Constr
   attr_reader :collection, :stations, :routes, :cargo_trains, :passenger_trains, :f_carrigs, :p_carrigs
 
   def initialize
@@ -120,7 +121,7 @@ class Constructor
       go_go, go_back, station_info_train, find!, show_amount_object
     ]
 
-    send_methods.each { |method| method }
+    send_methods.each { |method| puts method }
   end
 
   def show_amount_object
@@ -211,7 +212,8 @@ class Constructor
   end
 
   def route!
-    puts "Необходимо составить маршрут следования и добавить станции к созданным маршрутам.\nКакие станции из созданных вы хотите добавить в маршрут?"
+    puts "Необходимо составить маршрут следования и добавить станции к созданным маршрутам.
+    \к\nКакие станции из созданных вы хотите добавить в маршрут?"
 
     @routes.each_with_index do |type, index|
       puts "\t#{index}. Маршрут: #{type.name}"
@@ -228,7 +230,7 @@ class Constructor
   end
 
   def add_route!
-    begin
+    loop do
       @stations.each_with_index { |type, index| puts "\t#{index}. Станция: #{type.name}" }
 
       puts "Укажите номер станции.\nСтанции будут добавляться по порядку, от начальной и до конечной."
@@ -242,7 +244,8 @@ class Constructor
 
       puts 'Хотите добавить еще станцию? (да/нет)'
       yes_or_no = gets.chomp
-    end while yes_or_no != 'нет' && yes_or_no != ''
+      break if yes_or_no == 'нет' && yes_or_no == ''
+    end
 
     puts 'Хотите сформировать новый маршрут? (да/нет)'
     yes_or_no = gets.chomp
@@ -272,7 +275,7 @@ class Constructor
   end
 
   def correct_route!
-    begin
+    loop do
       @routes[@number_r].route.each_with_index do |type, index|
         puts "\t#{index}. Станция: #{type.name}"
       end
@@ -288,8 +291,8 @@ class Constructor
 
       puts 'Хотите еще удалить станцию? (да/нет)'
       yes_or_no = gets.chomp
-    end while yes_or_no != 'нет' && yes_or_no != ''
-
+      break if yes_or_no == 'нет' && yes_or_no == ''
+    end
     puts 'Хотите еще откорректировать маршрут (да/нет)?'
     yes_or_no = gets.chomp
 
@@ -383,7 +386,7 @@ class Constructor
   end
 
   def go_go
-    begin
+    loop do
       puts 'Хотите отправить поезда в путь (да/нет)'
       yes_or_no = gets.chomp
 
@@ -391,11 +394,12 @@ class Constructor
         go_go_cargo(@cargo_trains.size)
         go_go_passenger(@passenger_trains.size)
       end
-    end while yes_or_no != 'нет'
+      break if yes_or_no == 'нет'
+    end
   end
 
   def go_back
-    begin
+    loop do
       puts 'Хотите отправить поезда в обратный путь (да/нет)'
       yes_or_no = gets.chomp
 
@@ -403,7 +407,8 @@ class Constructor
         go_back_cargo(@cargo_trains.size)
         go_back_passenger(@passenger_trains.size)
       end
-    end while yes_or_no != 'нет'
+      break if yes_or_no == 'нет'
+    end
   end
 
   protected
